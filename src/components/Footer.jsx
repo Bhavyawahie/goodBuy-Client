@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container,Image, Row, Col, ListGroup } from 'react-bootstrap'
+import { Container,Image, Row, Col } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import logo_white_new from '../logo_white_new.png'
 
@@ -40,7 +40,7 @@ const Footer = () => {
                         </ul>
                     </Col>
                     <Col xs={6} md={3} lg={2} xl={2} className='pt-4 d-flex justify-content-center payment-provider-asset-container' >
-                        <a href="https://razorpay.com/" target="_blank"><img referrerpolicy="origin" src = "https://badges.razorpay.com/badge-light.png " style = {{height: "83px",borderRadius: "7px"}} alt = "Razorpay | Payment Gateway | Neobank"/></a>
+                        <a href="https://razorpay.com/" target="_blank" rel="noReferrer"><img referrerPolicy="origin" src = "https://badges.razorpay.com/badge-light.png " style = {{height: "83px",borderRadius: "7px"}} alt = "Razorpay | Payment Gateway | Neobank"/></a>
                     </Col>
                 </Row>
                 <Row className='mt-3'>
