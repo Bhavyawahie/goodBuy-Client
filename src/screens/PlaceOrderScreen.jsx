@@ -123,7 +123,7 @@ const PlaceOrderScreen = ({history}) => {
                                 {error && <Message variant='danger'>{error}</Message>}
                             </ListGroup.Item>
                             <ListGroup.Item className="d-grid border-top-0 ">
-                                <Button type='button' className='btn btn-block btn-warning' disable={cart.cartItems === 0 } onClick={placeOrderHandler}>Place Order</Button>
+                                {cart.cartItems === 0 ? <Button type='button' className='btn btn-block btn-warning' disbaled>Place Order</Button> : <Button type='button' className='btn btn-block btn-warning' onClick={placeOrderHandler}>Place Order</Button>}
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>
