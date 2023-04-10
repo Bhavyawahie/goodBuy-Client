@@ -27,7 +27,7 @@ const HomeScreen = ({match}) => {
             <Meta/>
             {!keyword ? <ProductCarousel/> : (
                 <Link to="/" className="btn btn-outline-secondary my-3">
-                    <i class="fas fa-chevron-left"></i>
+                    <i className="fas fa-chevron-left"></i>
                 </Link>
             )}
             <h2 className="py-3">Latest Products</h2>
