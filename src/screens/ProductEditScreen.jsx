@@ -51,7 +51,7 @@ const ProductEditScreen = ({ history, match }) => {
 
     useEffect(() => {
         setImage(imageURL)
-    }, [successImageUpdate])
+    }, [successImageUpdate, imageURL])
 
     function validateFileType(extFile) {
         return new Promise((resolve, reject) => {
@@ -91,7 +91,7 @@ const ProductEditScreen = ({ history, match }) => {
         <FormContainer>
             <h2>Edit Product</h2>
             {loadingUpdate && <Loader/>}
-            {errorUpdate || errorImageUpdate && <Message variant='danger'>{errorUpdate || errorImageUpdate}</Message>}
+            {(errorUpdate || errorImageUpdate) && <Message variant='danger'>{errorUpdate || errorImageUpdate}</Message>}
             {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
             <Form onSubmit={submitHandler} className='mt-4'>
                 <Form.Group controlId='name'>
