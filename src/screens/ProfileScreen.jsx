@@ -74,7 +74,7 @@ const ProfileScreen = ({ history, location }) => {
                 </Form.Group>
                 <Form.Group controlId='password'>
                     <Form.Label>
-                        password 
+                        New Password 
                     </Form.Label>
                     <Form.Control type='password' placeholder='Enter password' value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </Form.Group>
@@ -90,7 +90,7 @@ const ProfileScreen = ({ history, location }) => {
             <Col md={9}>
                 <h2>My orders</h2>
                 {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message> : (
-                    <Table stripped bordered hover responsive className='table-sm'>
+                    <Table stripped="true" bordered hover responsive className='table-sm'>
                         <thead>
                             <tr>
                                 <th>ID</th>
