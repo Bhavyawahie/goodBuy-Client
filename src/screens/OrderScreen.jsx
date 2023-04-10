@@ -12,7 +12,7 @@ import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstant
 let options
 const OrderScreen = ({match, history}) => {
     const getApi = async () => {
-        const {data} = await axios.get('/api/config/razorpay')
+        const {data} = await axios.get('https://fkh71k8n7f.execute-api.ap-south-1.amazonaws.com/production/api/config/razorpay')
         options = {
             "key": data 
         }
