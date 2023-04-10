@@ -11,10 +11,10 @@ const ShippingScreen = ({history}) => {
     const { shippingAddress } = cart
 
 
-    const [ address, setAddress ] = useState(shippingAddress.address)
-    const [ city, setCity ] = useState(shippingAddress.city)
-    const [ state, setState ] = useState(shippingAddress.state)
-    const [ pincode, setPincode ] = useState(shippingAddress.pincode)
+    const [ address, setAddress ] = useState(shippingAddress.address || null)
+    const [ city, setCity ] = useState(shippingAddress.city || null)
+    const [ state, setState ] = useState(shippingAddress.state || null)
+    const [ pincode, setPincode ] = useState(shippingAddress.pincode || null)
 
     const dispatch = useDispatch()
 
