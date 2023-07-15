@@ -20,11 +20,13 @@ import UserEditScreen from './screens/UserEditScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
+import SubHeader from './components/SubHeader'
 
 function App() {
   return (
     <Router>
       <Header/>
+      <SubHeader/>
       <main className="py-3">
         <Container>
           <Route path="/login" component={LoginScreen}/>

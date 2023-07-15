@@ -16,6 +16,10 @@ h3 {
   margin: 0.1rem;
 }
 
+.subheader {
+  background-color: #ecf0f190
+}
+
 .product-card {
   height: 90%
 }
