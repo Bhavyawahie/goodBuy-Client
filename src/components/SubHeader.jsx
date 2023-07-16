@@ -42,36 +42,42 @@ const SubHeader = () => {
 							<strong>Categories</strong>
 						</Dropdown.Toggle>
 						<Dropdown.Menu	show={isOpen1}	onMouseEnter={handleMouseEnter1}  onMouseLeave={handleMouseLeave1}>
-                            <Dropdown drop='right'>
-                                <Dropdown.Toggle as='span' variant="none" drop='right' align='center' id='dropdown-button-drop-right' title='Electronics' className="ms-2 ps-3 pe-3">
-                                    Electronics
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu drop='right'>
-                                    <Dropdown.Item >Action</Dropdown.Item>
-                                    <Dropdown.Item>Another action</Dropdown.Item>
-                                    <Dropdown.Item>Something else</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                            <Dropdown drop='right'>
-                                <Dropdown.Toggle as='span' variant="none" drop='right' align='center' id='dropdown-button-drop-right' title='Electronics' className="ms-2 ps-3 pe-3">
-                                    Electronics
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu drop='right'>
-                                    <Dropdown.Item ></Dropdown.Item>
-                                    <Dropdown.Item>Another action</Dropdown.Item>
-                                    <Dropdown.Item>Something else</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                            <Dropdown drop='right'>
-                                <Dropdown.Toggle as='span' variant="none" drop='right' align='center' id='dropdown-button-drop-right' title='Electronics' className="ms-2 ps-3 pe-3">
-                                    Electronics
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu drop='right'>
-                                    <Dropdown.Item >Action</Dropdown.Item>
-                                    <Dropdown.Item>Another action</Dropdown.Item>
-                                    <Dropdown.Item>Something else</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <LinkContainer to="/categories/Televisions & Accessories">
+                                    <Dropdown.Item><strong>Televisions & Accessories</strong></Dropdown.Item>
+                                </LinkContainer>	
+                                <LinkContainer to="/categories/Home Appliances">
+                                    <Dropdown.Item><strong>Home Appliances</strong></Dropdown.Item>
+                                </LinkContainer>	
+                                <LinkContainer to="/categories/Phones & Wearables">
+                                    <Dropdown.Item><strong>Phones & Wearables</strong></Dropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/categories/Computers & Tablets">
+                                    <Dropdown.Item><strong>Computers & Tablets</strong></Dropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/categories/Kitchen Appliances">
+                                    <Dropdown.Item><strong>Kitchen Appliances</strong></Dropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/categories/Audio & Video">
+                                    <Dropdown.Item><strong>Audio & Video</strong></Dropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/categories/Health & Fitness">
+                                    <Dropdown.Item><strong>Health & Fitness</strong></Dropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/categories/Grooming & Personal Care">
+                                    <Dropdown.Item><strong>Grooming & Personal Care</strong></Dropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/categories/Cameras & Accessories">
+                                    <Dropdown.Item><strong>Cameras & Accessories</strong></Dropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/categories/Smart Devices">
+                                    <Dropdown.Item><strong>Smart Devices</strong></Dropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/categories/Gaming">
+                                    <Dropdown.Item><strong>Gaming</strong></Dropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/categories/Accessories">
+                                    <Dropdown.Item><strong>Accessories</strong></Dropdown.Item>
+                                </LinkContainer>
 						</Dropdown.Menu>
 					</Dropdown>
 					<Dropdown>
@@ -85,14 +91,7 @@ const SubHeader = () => {
 						>
 							<strong>Best Selling</strong>
 						</Dropdown.Toggle>
-						<Dropdown.Menu
-							show={isOpen2}
-							onMouseEnter={handleMouseEnter2}
-							onMouseLeave={handleMouseLeave2}
-						>
-    						<LinkContainer to="/categories/Televisions&Accessories">
-                                <Dropdown.Item>Televisions & Accessories</Dropdown.Item>
-                            </LinkContainer>	
+						<Dropdown.Menu show={isOpen2} onMouseEnter={handleMouseEnter2} onMouseLeave={handleMouseLeave2}>	
 							<Dropdown.Item>Another action</Dropdown.Item>
 							<Dropdown.Item>Something else</Dropdown.Item>
 						</Dropdown.Menu>
