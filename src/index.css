@@ -17,7 +17,13 @@ h3 {
 }
 
 .subheader {
-  background-color: #ecf0f190
+  background-color: #e4e9ea
+}
+
+#dropdown-button-drop-right:active, 
+#dropdown-button-drop-right:focus {
+  outline: none;
+  border: none;
 }
 
 .product-card {
@@ -42,7 +48,7 @@ h3 {
 }
 
 .latest-product-carousel {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .latest-product-carousel .carousel-control-prev,

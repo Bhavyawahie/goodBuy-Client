@@ -59,12 +59,12 @@ const HomeScreen = ({ match }) => {
 					<i className="fas fa-chevron-left"></i>
 				</Link>
 			)}
-			<h2 className="py-3">Latest Products</h2>
+			{!keyword && <h2 className="py-3">Latest Products</h2>}
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
-			) : (
+			) : !keyword && (
 				<>
 					<Carousell products={products} />
 					{(viewport === "xs" || viewport === "sm") && (
