@@ -92,13 +92,6 @@ const HomeScreen = ({ match }) => {
                             </Container>
                         </>
 					)}
-					<Container className="d-flex justify-content-center mt-5">
-						<Paginate
-							pages={pages}
-							page={page}
-							keyword={keyword ? keyword : ""}
-						/>
-					</Container>
 				</>
 			)}{" "}
 		</>
