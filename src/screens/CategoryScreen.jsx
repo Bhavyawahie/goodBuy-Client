@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { listProducts } from "../actions/productActions";
 
 const CategoryScreen = ({match}) => {
-    // const category = match.params.
+    const category = match.params.category
     const pageNumber = match.params.pageNumber || 1
     const location = useLocation()
     const keyword = ""
@@ -19,8 +19,8 @@ const CategoryScreen = ({match}) => {
     const {loading, error, products, page, pages} = productList
 
     useEffect(() => {
-        dispatch(listProducts(keyword, pageNumber))
-    }, [dispatch, keyword, pageNumber]);
+        dispatch(listProducts(keyword, pageNumber, category))
+    }, [dispatch, keyword, pageNumber, category]);
 
 	return (
         <Row>
