@@ -1,65 +1,242 @@
-import React from 'react'
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {Row, Col, Form, Button} from 'react-bootstrap'
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 const FilterSidebar = () => {
-    const brandArray = state.products.reduce((acc, curr) => acc.includes(curr.company) ? acc : [...acc, curr.company], [])
-    return (
-        <div className='filter-main'>
-            <div className='filter-header'>
-                <h3>Filters</h3>
-                <button onClick={() => filterDispatch({ type: "CLEAR_FILTER" })} className='clear-filter-btn'>Clear all filters</button>
-            </div>
-            <div className='filter-child'>
+    const location = useLocation()
+	const dispatch = useDispatch();
+	const distinct = (value, index, self) => self.indexOf(value) === index;
+	const [searchTxt, setSearchTxt] = useState("");
+	const productList = useSelector((state) => state.productList);
+	const { loading, error, products, page, pages } = productList;
 
-                <h3>Filter by ratings :-</h3>
-                <div className='slider-filter'>
-                    <div className='slider-title'>
-                        <span>
-                            <img src={require("../Images/star-icon.png")} alt="" srcSet="" width={"15px"} /> 1
-                        </span>
-                        <span>
-                            5 <img src={require("../Images/star-icon.png")} alt="" srcSet="" width={"15px"} />
-                        </span>
-                    </div>
-                    <input
-                        type="range"
-                        min="1"
-                        max="5"
-                        step="1"
-                        list="steplist"
-                        value={filterState.filterRating}
-                        onChange={(e) => filterDispatch({ type: "RATING_RANGE", payload: e.target.value })}
-                    />
-                    <datalist id="steplist">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </datalist>
-                </div>
+	const brands = products.map((product) => product.brand).filter(distinct);
+	const categories = products
+		.map((product) => product.category)
+		.filter(distinct);
 
+	const searchHandler = (e) => {
+		if (e.keyCode === 13) {
+			dispatch({ type: "SEARCH_PRODUCT", payload: searchTxt });
+			setSearchTxt("");
+		}
+	};
 
-                <h3>Filter by Categories :-</h3>
-                {state.categories.map((item) => {
-                    return <div key={item._id}><label><input type='checkbox' checked={filterState.categoryCheckbox.includes(item.categoryName)} onChange={() => filterDispatch({ type: "ADD_CATEGORY_FIELD", payload: item.categoryName })} />{item.categoryName}</label></div>
-                })}
+	return (
+		<Row className="filter-component position-relative h-100 overflow-auto w-25">
+			<div className="flex-container filter-header p-3 d-flex justify-content-between align-items-center">
+				<h3 className="txt-header-3">Filters</h3>
+				<Button variant="clear" className="btn-outline-info btn-sm">Clear All</Button>
+			</div>
 
-                <h3>Filter by Brand :-</h3>
-                {brandArray.map((item, index) => {
-                    return <div key={index}><label><input type='checkbox' checked={filterState.brandCheckbox.includes(item)} onChange={() => filterDispatch({ type: "ADD_BRAND_FIELD", payload: item })} />{item}</label></div>
-                })}
+			<div className="sort-container p-3">
+				<h4>Sort by Price:</h4>
+				<Form.Check name="sort" label="Low to High" type="radio" />
+				<Form.Check name="sort" label="High to Low" type="radio" />
+			</div>
 
+			<div className="filter-container p-3">
+                <h4>Availibity</h4>
+				<Form.Check label="Exclude Out of stock" type="checkbox" />
+                <h4>Delivery</h4>
+				<Form.Check label="Fast Delivery only" type="checkbox" />
+				<h4>Pricing</h4>
+				<Form.Control
+					className="txt-range"
+					type="range"
+					min="0"
+					max="30000"
+					step="100"
+				/>
+				<h4>Brands</h4>
+				{
+                    brands.map((brand) => (
+                    <Row>
+                        <label key={brand} >
+                            <input
+                                type="checkbox"
+                                    onChange={() =>
+                                    dispatch({
+                                        type: "TOGGLE_BRAND",
+                                        payload: brand,
+                                    })
+                                    }
+                                    // checked={brandFilter.some(
+                                    // (value) => value === brand
+                                    // )}
+                            />{" "}
+                            {brand}{" "}
+                        </label>
+                    </Row>
+                ))}
+				{   !location.pathname.indexOf('/categories') === 0 && (
 
-                <h3>Sort By Price :-</h3>
-                <div><label><input type='radio' name='ratings' onClick={() => filterDispatch({ type: "ADD_PRICE_RADIO", payload: "lowtohigh" })} />Price (low to high)</label></div>
-                <div><label><input type='radio' name='ratings' onClick={() => filterDispatch({ type: "ADD_PRICE_RADIO", payload: "hightolow" })} />Price (high to low)</label></div>
+                    <>
+                        <h4>Categories</h4>
+                            {
+                            categories.map((category) => (
+                            <Row>
+                                <label key={category}>
+                                    <input
+                                        type="checkbox"
+                                        onChange={() =>
+                                            dispatch({
+                                                type: "TOGGLE_CATEGORY",
+                                                payload: category,
+                                            })
+                                        }
+                                        // checked={categoryFilter.some(
+                                        //     (value) => value === category
+                                        // )}
+                                    />{" "}
+                                    {category}{" "}
+                                </label>
+                            </Row>
+                        ))}
+                    </>
+                )
+                }
+			</div>
+		</Row>
+		// <div className="filter-component">
+		// 	<div className="flex-container filter-header">
+		// 		<h3 className="txt-header-3">Filters</h3>
+		// 		<button
+		// 			type="button"
+		// 			className="btn-clear"
+		// 			// onClick={() => dispatch({ type: "CLEAR_ALL_FILTERS" })}
+		// 		>
+		// 			Clear All
+		// 		</button>
+		// 	</div>
 
+		// 	<div className="txt-box">
+		// 		{" "}
+		// 		<input
+		// 			className="txt-input"
+		// 			type="text"
+		// 			value={searchTxt}
+		// 			onChange={(e) => setSearchTxt(e.target.value)}
+		// 			onKeyDown={searchHandler}
+		// 			placeholder="Search Products"
+		// 		/>
+		// 		<span
+		// 			className="txt-icon"
+		// 			// onClick={() => {
+		// 			// 	dispatch({
+		// 			// 		type: "SEARCH_PRODUCT",
+		// 			// 		payload: searchTxt,
+		// 			// 	});
+		// 			// 	setSearchTxt("");
+		// 			// }}
+		// 		>
+		// 			<i className="fas fa-search fa-lg"></i>
+		// 		</span>
+		// 	</div>
 
+		// 	<div className="sort-container">
+		// 		<h4>Sort by Price:</h4>
+		// 		<label>
+		// 			<input
+		// 				type="radio"
+		// 				name="sort"
+		// 				// onChange={() =>
+		// 				// 	dispatch({ type: "SORT", payload: "LOW_TO_HIGH" })
+		// 				// }
+		// 				// checked={sortBy === "LOW_TO_HIGH"}
+		// 			/>{" "}
+		// 			Low to High
+		// 		</label>
 
-            </div>
+		// 		<label>
+		// 			<input
+		// 				type="radio"
+		// 				name="sort"
+		// 				// onChange={() =>
+		// 				// 	dispatch({ type: "SORT", payload: "HIGH_TO_LOW" })
+		// 				// }
+		// 				// checked={sortBy === "HIGH_TO_LOW"}
+		// 			/>{" "}
+		// 			High to Low
+		// 		</label>
+		// 	</div>
 
-        </div>
-    )
-}
+		// 	<div className="filter-container">
+		// 		<h4>Filters:</h4>
+		// 		<label>
+		// 			<input
+		// 				type="checkbox"
+		// 				// onChange={() => dispatch({ type: "TOGGLE_STOCK" })}
+		// 				// checked={inStock}
+		// 			/>{" "}
+		// 			Exclude out of stock{" "}
+		// 		</label>
+		// 		<label>
+		// 			<input
+		// 				type="checkbox"
+		// 				// onChange={() => dispatch({ type: "TOGGLE_DELIVERY" })}
+		// 				// checked={fastDelivery}
+		// 			/>{" "}
+		// 			Fast Delivery only{" "}
+		// 		</label>
+		// 		<label>
+		// 			<b>Price Range:</b>
+		//             {/* 0 to {priceRange} */}
+		// 			<input
+		// 				className="txt-range"
+		// 				type="range"
+		// 				min="0"
+		// 				max="30000"
+		// 				// value={priceRange}
+		// 				step="100"
+		// 				// onChange={(event) =>
+		// 				// 	dispatch({
+		// 				// 		type: "PRICE_RANGE",
+		// 				// 		payload: event.target.value,
+		// 				// 	})
+		// 				// }
+		// 			/>
+		// 		</label>
+		// 		<h4>Brands</h4>
+		// 		{brands.map((brand) => (
+		// 			<label key={brand}>
+		// 				<input
+		// 					type="checkbox"
+		// 					// onChange={() =>
+		// 					// 	dispatch({
+		// 					// 		type: "TOGGLE_BRAND",
+		// 					// 		payload: brand,
+		// 					// 	})
+		// 					// }
+		// 					// checked={brandFilter.some(
+		// 					// 	(value) => value === brand
+		// 					// )}
+		// 				/>{" "}
+		// 				{brand}{" "}
+		// 			</label>
+		// 		))}
+		// 		<h4>Categories</h4>
+		// 		{categories.map((category) => (
+		// 			<label key={category}>
+		// 				<input
+		// 					type="checkbox"
+		// 					// onChange={() =>
+		// 					// 	dispatch({
+		// 					// 		type: "TOGGLE_CATEGORY",
+		// 					// 		payload: category,
+		// 					// 	})
+		// 					// }
+		// 					// checked={categoryFilter.some(
+		// 					// 	(value) => value === category
+		// 					// )}
+		// 				/>{" "}
+		// 				{category}{" "}
+		// 			</label>
+		// 		))}
+		// 	</div>
+		// </div>
+	);
+};
 
-export default FilterSidebar
+export default FilterSidebar;
