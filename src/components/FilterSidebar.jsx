@@ -3,25 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import {Row, Col, Form, Button} from 'react-bootstrap'
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-const FilterSidebar = () => {
+
+const FilterSidebar = ({handleSortLowToHigh, handleSortHighToLow}) => {
     const location = useLocation()
 	const dispatch = useDispatch();
 	const distinct = (value, index, self) => self.indexOf(value) === index;
 	const [searchTxt, setSearchTxt] = useState("");
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products, page, pages } = productList;
+	const { loading, error, products, page, pages, sortBy } = productList;
 
 	const brands = products.map((product) => product.brand).filter(distinct);
 	const categories = products
 		.map((product) => product.category)
 		.filter(distinct);
-
-	const searchHandler = (e) => {
-		if (e.keyCode === 13) {
-			dispatch({ type: "SEARCH_PRODUCT", payload: searchTxt });
-			setSearchTxt("");
-		}
-	};
+	
 
 	return (
 		<Row className="filter-component position-relative h-100 overflow-auto w-25">
@@ -32,18 +27,16 @@ const FilterSidebar = () => {
 
 			<div className="sort-container p-3">
 				<h4>Sort by Price:</h4>
-				<Form.Check name="sort" label="Low to High" type="radio" />
-				<Form.Check name="sort" label="High to Low" type="radio" />
+				<Form.Check name="sort" label="Low to High" type="radio"  onChange={handleSortLowToHigh}/>
+				<Form.Check name="sort" label="High to Low" type="radio" onChange={handleSortHighToLow}/>
 			</div>
 
 			<div className="filter-container p-3">
                 <h4>Availibity</h4>
-				<Form.Check label="Exclude Out of stock" type="checkbox" />
-                <h4>Delivery</h4>
-				<Form.Check label="Fast Delivery only" type="checkbox" />
+				<Form.Check label="Exclude Out of stock" type="checkbox" className="my-3"/>
 				<h4>Pricing</h4>
 				<Form.Control
-					className="txt-range"
+					className="txt-range my-3"
 					type="range"
 					min="0"
 					max="30000"

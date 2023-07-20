@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_CREATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_SUCCESS, PRODUCT_CREATE_REVIEW_FAIL, PRODUCT_IMAGE_UPLOAD_FAIL, PRODUCT_IMAGE_UPLOAD_REQUEST, PRODUCT_IMAGE_UPLOAD_SUCCESS} from '../constants/productConstants'
+import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_CREATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_SUCCESS, PRODUCT_CREATE_REVIEW_FAIL, PRODUCT_IMAGE_UPLOAD_FAIL, PRODUCT_IMAGE_UPLOAD_REQUEST, PRODUCT_IMAGE_UPLOAD_SUCCESS, PRODUCT_SORT_BY_HIGH_TO_LOW_SET, PRODUCT_SORT_BY_LOW_TO_HIGH_SET} from '../constants/productConstants'
 import { PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL} from '../constants/productConstants'
 import { logout } from './userActions'
 
@@ -19,6 +19,25 @@ export const listProducts = (keyword = '', pageNumber = '', category="") => asyn
         dispatch({
             type: PRODUCT_LIST_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+export const sortProducts = (sortType) => (dispatch, getState) => {
+    const {productList: {products}} = getState()
+    if(sortType === "LOW_TO_HIGH"){
+        dispatch({
+            type: PRODUCT_SORT_BY_LOW_TO_HIGH_SET,
+            payload: {
+                products: products
+            }
+        })
+    } else {
+        dispatch({
+            type: PRODUCT_SORT_BY_HIGH_TO_LOW_SET,
+            payload: {
+                products: products
+            }
         })
     }
 }

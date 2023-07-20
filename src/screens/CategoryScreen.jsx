@@ -7,7 +7,8 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import { listProducts } from "../actions/productActions";
+import { listProducts, sortProducts } from "../actions/productActions";
+import { PRODUCT_LIST_SUCCESS } from "../constants/productConstants";
 
 const CategoryScreen = ({match}) => {
     const category = match.params.category
@@ -17,14 +18,29 @@ const CategoryScreen = ({match}) => {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
     const {loading, error, products, page, pages} = productList
+    const productSort = useSelector(state => state.productSort)
+    const {products: {updatedProducts}} = productSort
+
+    const handleSortLowToHigh = () => {
+        dispatch(sortProducts("LOW_TO_HIGH"))
+    }
+    const handleSortHighToLow = () => {
+        dispatch(sortProducts("HIGH_TO_LOW"))
+    }
 
     useEffect(() => {
         dispatch(listProducts(keyword, pageNumber, category))
     }, [dispatch, keyword, pageNumber, category]);
 
+    useEffect(() => {
+        if(updatedProducts) {
+            dispatch({type: PRODUCT_LIST_SUCCESS, payload: updatedProducts})
+        }
+    }, [updatedProducts])
+
 	return (
         <Row>
-            <FilterSidebar/>
+            <FilterSidebar handleSortLowToHigh={handleSortLowToHigh} handleSortHighToLow={handleSortHighToLow}/>
             <Col>
                     {
                     loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (

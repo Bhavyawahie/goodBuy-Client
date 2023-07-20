@@ -1,5 +1,5 @@
 //The reducer dealing with state of productList on the Homepage
-import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_FAIL, PRODUCT_CREATE_SUCCESS, PRODUCT_CREATE_RESET, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_RESET, PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_SUCCESS, PRODUCT_CREATE_REVIEW_FAIL, PRODUCT_CREATE_REVIEW_RESET, PRODUCT_IMAGE_UPLOAD_SUCCESS, PRODUCT_IMAGE_UPLOAD_FAIL, PRODUCT_IMAGE_UPLOAD_RESET, PRODUCT_IMAGE_UPLOAD_REQUEST} from '../constants/productConstants'
+import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_FAIL, PRODUCT_CREATE_SUCCESS, PRODUCT_CREATE_RESET, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_UPDATE_RESET, PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_SUCCESS, PRODUCT_CREATE_REVIEW_FAIL, PRODUCT_CREATE_REVIEW_RESET, PRODUCT_IMAGE_UPLOAD_SUCCESS, PRODUCT_IMAGE_UPLOAD_FAIL, PRODUCT_IMAGE_UPLOAD_RESET, PRODUCT_IMAGE_UPLOAD_REQUEST, PRODUCT_SORT_BY_SET, PRODUCT_SORT_BY_LOW_TO_HIGH_SET, PRODUCT_SORT_BY_HIGH_TO_LOW_SET} from '../constants/productConstants'
 import { PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL} from '../constants/productConstants'
 
 export const productListReducer = (state = { products: [] }, action) => {
@@ -12,6 +12,23 @@ export const productListReducer = (state = { products: [] }, action) => {
             return { loading: false, error: action.payload}
         default:
             return state
+    }
+}
+
+export const productSortReducer = (state = {}, action) => {
+    switch(action.type) {
+        case PRODUCT_SORT_BY_LOW_TO_HIGH_SET:
+            return {
+                ...state, 
+                products: action.payload.products.sort((productA, productB) => productA.price - productB.price)
+            }
+        case PRODUCT_SORT_BY_HIGH_TO_LOW_SET:
+            return {
+                ...state, 
+                products: action.payload.products.sort((productA, productB) => productB.price - productA.price)
+            }
+        default: 
+            return state    
     }
 }
 
