@@ -15,22 +15,22 @@ export const productListReducer = (state = { products: [] }, action) => {
     }
 }
 
-export const productSortReducer = (state = {}, action) => {
-    switch(action.type) {
-        case PRODUCT_SORT_BY_LOW_TO_HIGH_SET:
-            return {
-                ...state, 
-                products: action.payload.products.sort((productA, productB) => productA.price - productB.price)
-            }
-        case PRODUCT_SORT_BY_HIGH_TO_LOW_SET:
-            return {
-                ...state, 
-                products: action.payload.products.sort((productA, productB) => productB.price - productA.price)
-            }
-        default: 
-            return state    
-    }
-}
+// export const productSortReducer = (state = {}, action) => {
+//     switch(action.type) {
+//         case PRODUCT_SORT_BY_LOW_TO_HIGH_SET:
+//             return {
+//                 ...state, 
+//                 products: action.payload
+//             }
+//         case PRODUCT_SORT_BY_HIGH_TO_LOW_SET:
+//             return {
+//                 ...state, 
+//                 products: action.payload
+//             }
+//         default: 
+//             return state    
+//     }
+// }
 
 export const productDetailsReducer = (state = { product: { reviews : [] } }, action) => {
     switch(action.type) {

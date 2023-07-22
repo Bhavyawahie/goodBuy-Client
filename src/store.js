@@ -13,7 +13,7 @@ const reducer = combineReducers({
     productCreate: productCreateReducer,
     productUpdate: productUpdateReducer,
     productDelete: productDeleteReducer,
-    productSort: productSortReducer,
+    // productSort: productSortReducer,
     productPictureUpdate: productPictureUpdateReducer,
     productReviewCreate: productReviewCreateReducer,
     cart: cartReducer,
@@ -38,7 +38,7 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress') ? JSO
 
 const initialState = {
     cart: {cartItems: cartItemsFromStorage, shippingAddress: shippingAddressFromStorage},
-    userLogin: {userInfo: userInfoFromStorage}, productSort: {products: []}
+    userLogin: {userInfo: userInfoFromStorage}, 
 }
 
 const middleware = [thunk]

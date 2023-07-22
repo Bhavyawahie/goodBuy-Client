@@ -24,23 +24,37 @@ export const listProducts = (keyword = '', pageNumber = '', category="") => asyn
 }
 
 export const sortProducts = (sortType) => (dispatch, getState) => {
-    const {productList: {products}} = getState()
+    const {productList: {products, pages, page}} = getState()
     if(sortType === "LOW_TO_HIGH"){
         dispatch({
-            type: PRODUCT_SORT_BY_LOW_TO_HIGH_SET,
+            type: PRODUCT_LIST_SUCCESS,
             payload: {
-                products: products
+                products: products.sort((productA, productB) => productA.price - productB.price), page, pages
             }
         })
     } else {
         dispatch({
-            type: PRODUCT_SORT_BY_HIGH_TO_LOW_SET,
+            type: PRODUCT_LIST_SUCCESS,
             payload: {
-                products: products
+                products: products.sort((productA, productB) => productB.price - productA.price), page, pages
             }
         })
     }
 }
+
+export const excludeOutOfStockProducts = () => (dispatch, getState) => {
+    const {productList: {products, page, pages}} = getState()
+    const updated = products.filter((product) => product.countInStock !== 0 )
+    dispatch({
+        type: PRODUCT_LIST_SUCCESS,
+        payload: {
+            products: updated,
+            page: page,
+            pages: pages
+        }
+    })
+}
+
 
 export const listProductDetails = (id) => async (dispatch) => {
     try {
