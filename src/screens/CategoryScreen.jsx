@@ -17,7 +17,7 @@ const CategoryScreen = ({match}) => {
     const keyword = ""
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
-    const {loading, error, products, page, pages} = productList
+    const {loading, error, products, page, pages, filteredProducts} = productList
     // const productSort = useSelector(state => state.productSort)
     // const {products: {updatedProducts}} = productSort
 
@@ -25,18 +25,20 @@ const CategoryScreen = ({match}) => {
         dispatch(clearAllFilters())
     }
 
-    const handleSortLowToHigh = () => {
-        dispatch(sortProducts("LOW_TO_HIGH"))
+    const handleSort = (e) => {
+        let {value} = e.target
+        if(value === "DEFAULT") {
+            dispatch(listProducts(keyword, pageNumber, category))
+        }
+        dispatch(sortProducts(value))
     }
-    const handleSortHighToLow = () => {
-        dispatch(sortProducts("HIGH_TO_LOW"))
-    }
+
     const outOfStockHandler = (e) => {
         const {checked} = e.target
         if(checked) {
-            dispatch(excludeOutOfStockProducts())
+            dispatch(excludeOutOfStockProducts(true))
         } else {
-            dispatch(listProducts(keyword, pageNumber, category))
+            dispatch(excludeOutOfStockProducts(false))
         }
     }
 
@@ -52,7 +54,7 @@ const CategoryScreen = ({match}) => {
 
 	return (
         <Row>
-            <FilterSidebar handleSortLowToHigh={handleSortLowToHigh} handleSortHighToLow={handleSortHighToLow} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler}/>
+            <FilterSidebar handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler}/>
             <Col>
                     {
                     loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
@@ -62,7 +64,7 @@ const CategoryScreen = ({match}) => {
                                     <Col className="d-flex justify-content-end"></Col>
                                 </Row>
                             {
-                                products.map(product => (
+                                filteredProducts.map(product => (
                                     <Col 
                                         md={4}
                                         lg={4}

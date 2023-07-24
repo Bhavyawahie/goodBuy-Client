@@ -4,7 +4,7 @@ import {Row, Col, Form, Button} from 'react-bootstrap'
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 
-const FilterSidebar = ({handleSortLowToHigh, handleSortHighToLow, handleExcludeOutOfStock, handleClearAllFilters}) => {
+const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilters}) => {
     const location = useLocation()
 	const dispatch = useDispatch();
 	const distinct = (value, index, self) => self.indexOf(value) === index;
@@ -26,8 +26,11 @@ const FilterSidebar = ({handleSortLowToHigh, handleSortHighToLow, handleExcludeO
 
 			<div className="sort-container p-3">
 				<h4>Sort by Price:</h4>
-				<Form.Check name="sort" label="Low to High" type="radio"  onChange={handleSortLowToHigh}/>
-				<Form.Check name="sort" label="High to Low" type="radio" onChange={handleSortHighToLow}/>
+				<Form.Control as='select' className="w-50" size="sm" onChange={(e) => handleSort(e)}>
+					<option value="DEFAULT" >Relevance</option>
+					<option value="LOW_TO_HIGH">Low to High</option>
+					<option value="HIGH_TO_LOW">High To Low</option>
+				</Form.Control>
 			</div>
 
 			<div className="filter-container p-3">
