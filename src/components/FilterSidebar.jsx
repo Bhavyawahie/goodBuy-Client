@@ -4,7 +4,7 @@ import {Row, Col, Form, Button} from 'react-bootstrap'
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 
-const FilterSidebar = ({handleSortLowToHigh, handleSortHighToLow, handleExcludeOutOfStock}) => {
+const FilterSidebar = ({handleSortLowToHigh, handleSortHighToLow, handleExcludeOutOfStock, handleClearAllFilters}) => {
     const location = useLocation()
 	const dispatch = useDispatch();
 	const distinct = (value, index, self) => self.indexOf(value) === index;
@@ -21,7 +21,7 @@ const FilterSidebar = ({handleSortLowToHigh, handleSortHighToLow, handleExcludeO
 		<Row className="filter-component position-relative h-100 overflow-auto w-25">
 			<div className="flex-container filter-header p-3 d-flex justify-content-between align-items-center">
 				<h3 className="txt-header-3">Filters</h3>
-				<Button variant="clear" className="btn-outline-info btn-sm">Clear All</Button>
+				<Button variant="clear" className="btn-outline-info btn-sm" onClick={handleClearAllFilters}>Clear All</Button>
 			</div>
 
 			<div className="sort-container p-3">

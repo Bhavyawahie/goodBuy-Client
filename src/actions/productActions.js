@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_CREATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_SUCCESS, PRODUCT_CREATE_REVIEW_FAIL, PRODUCT_IMAGE_UPLOAD_FAIL, PRODUCT_IMAGE_UPLOAD_REQUEST, PRODUCT_IMAGE_UPLOAD_SUCCESS, PRODUCT_SORT_BY_HIGH_TO_LOW_SET, PRODUCT_SORT_BY_LOW_TO_HIGH_SET} from '../constants/productConstants'
+import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_CREATE_FAIL, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAIL, PRODUCT_CREATE_REVIEW_REQUEST, PRODUCT_CREATE_REVIEW_SUCCESS, PRODUCT_CREATE_REVIEW_FAIL, PRODUCT_IMAGE_UPLOAD_FAIL, PRODUCT_IMAGE_UPLOAD_REQUEST, PRODUCT_IMAGE_UPLOAD_SUCCESS, PRODUCT_SORT_BY_HIGH_TO_LOW_SET, PRODUCT_SORT_BY_LOW_TO_HIGH_SET, PRODUCT_SORT_BY_HIGH_TO_LOW_RESET, PRODUCT_SORT_BY_RESET, PRODUCT_EXCLUDE_OUT_OF_STOCK_SET} from '../constants/productConstants'
 import { PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL} from '../constants/productConstants'
 import { logout } from './userActions'
 
@@ -24,34 +24,42 @@ export const listProducts = (keyword = '', pageNumber = '', category="") => asyn
 }
 
 export const sortProducts = (sortType) => (dispatch, getState) => {
-    const {productList: {products, pages, page}} = getState()
-    if(sortType === "LOW_TO_HIGH"){
+    if(sortType == "LOW_TO_HIGH") {
         dispatch({
-            type: PRODUCT_LIST_SUCCESS,
-            payload: {
-                products: products.sort((productA, productB) => productA.price - productB.price), page, pages
-            }
+            type: PRODUCT_SORT_BY_LOW_TO_HIGH_SET,
+            payload: sortType
         })
     } else {
         dispatch({
-            type: PRODUCT_LIST_SUCCESS,
-            payload: {
-                products: products.sort((productA, productB) => productB.price - productA.price), page, pages
-            }
+            type: PRODUCT_SORT_BY_HIGH_TO_LOW_SET,
+            payload: sortType
         })
     }
+    // const {productList: {products, pages, page}} = getState()
+    // if(sortType === "LOW_TO_HIGH"){
+    //     dispatch({
+    //         type: PRODUCT_LIST_SUCCESS,
+    //         payload: {
+    //             products: products.sort((productA, productB) => productA.price - productB.price), page, pages
+    //         }
+    //     })
+    // } else {
+    //     dispatch({
+    //         type: PRODUCT_LIST_SUCCESS,
+    //         payload: {
+    //             products: products.sort((productA, productB) => productB.price - productA.price), page, pages
+    //         }
+    //     })
+    // }
 }
 
 export const excludeOutOfStockProducts = () => (dispatch, getState) => {
-    const {productList: {products, page, pages}} = getState()
-    const updated = products.filter((product) => product.countInStock !== 0 )
+    dispatch({type: PRODUCT_EXCLUDE_OUT_OF_STOCK_SET})
+}
+
+export const clearAllFilters = () => (dispatch) => {
     dispatch({
-        type: PRODUCT_LIST_SUCCESS,
-        payload: {
-            products: updated,
-            page: page,
-            pages: pages
-        }
+        type: PRODUCT_SORT_BY_RESET
     })
 }
 

@@ -7,7 +7,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import { excludeOutOfStockProducts, listProducts, sortProducts } from "../actions/productActions";
+import { clearAllFilters, excludeOutOfStockProducts, listProducts, sortProducts } from "../actions/productActions";
 import { PRODUCT_LIST_SUCCESS } from "../constants/productConstants";
 
 const CategoryScreen = ({match}) => {
@@ -20,6 +20,10 @@ const CategoryScreen = ({match}) => {
     const {loading, error, products, page, pages} = productList
     // const productSort = useSelector(state => state.productSort)
     // const {products: {updatedProducts}} = productSort
+
+    const clearAllFiltersHandler = () => {
+        dispatch(clearAllFilters())
+    }
 
     const handleSortLowToHigh = () => {
         dispatch(sortProducts("LOW_TO_HIGH"))
@@ -48,7 +52,7 @@ const CategoryScreen = ({match}) => {
 
 	return (
         <Row>
-            <FilterSidebar handleSortLowToHigh={handleSortLowToHigh} handleSortHighToLow={handleSortHighToLow} handleExcludeOutOfStock={outOfStockHandler}/>
+            <FilterSidebar handleSortLowToHigh={handleSortLowToHigh} handleSortHighToLow={handleSortHighToLow} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler}/>
             <Col>
                     {
                     loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
