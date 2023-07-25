@@ -78,8 +78,9 @@ const CategoryScreen = ({match}) => {
     }, [dispatch, appliedFilters, filteredProducts])
 
     useEffect(() => {
+        if(brands.length > 0)
         debouncedDispatch(dispatch, brands);
-        console.log("realtime",brands)
+        // console.log("realtime",brands)
     }, [brands])
 
 	return (
