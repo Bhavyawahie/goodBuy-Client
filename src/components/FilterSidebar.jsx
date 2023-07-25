@@ -4,7 +4,7 @@ import {Row, Col, Form, Button} from 'react-bootstrap'
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 
-const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilters}) => {
+const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilters, handleBrandFilteration}) => {
     const location = useLocation()
 	const dispatch = useDispatch();
 	const distinct = (value, index, self) => self.indexOf(value) === index;
@@ -51,11 +51,8 @@ const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilte
                         <label key={brand} >
                             <input
                                 type="checkbox"
-                                    onChange={() =>
-                                    dispatch({
-                                        type: "TOGGLE_BRAND",
-                                        payload: brand,
-                                    })
+                                    onClick={(e) =>
+										handleBrandFilteration(e, brand)
                                     }
                                     // checked={brandFilter.some(
                                     // (value) => value === brand

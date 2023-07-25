@@ -7,10 +7,12 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import { clearAllFilters, excludeOutOfStockProducts, listProducts, sortProducts } from "../actions/productActions";
+import { clearAllFilters, excludeOutOfStockProducts, filteredProductsViaBrands, listProducts, sortProducts } from "../actions/productActions";
 import { PRODUCT_LIST_SUCCESS } from "../constants/productConstants";
+import { useState } from "react";
 
 const CategoryScreen = ({match}) => {
+    const [brands, setBrands] = useState([])
     const category = match.params.category
     const pageNumber = match.params.pageNumber || 1
     const location = useLocation()
@@ -20,6 +22,18 @@ const CategoryScreen = ({match}) => {
     const {loading, error, products, page, pages, filteredProducts, sortBy, appliedFilters} = productList
     // const productSort = useSelector(state => state.productSort)
     // const {products: {updatedProducts}} = productSort
+
+    const debounce = (func, delay) =>  {
+        let timerId;
+        return function (...args) {
+            clearTimeout(timerId);
+            timerId = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
+    const debouncedDispatch = debounce((dispatch, data) => {
+        dispatch(filteredProductsViaBrands(data))
+    }, 1000);
 
     const clearAllFiltersHandler = () => {
         dispatch(clearAllFilters())
@@ -42,6 +56,18 @@ const CategoryScreen = ({match}) => {
         }
     }
 
+    const brandFilterHandler = (e, brand) => {
+        if(e.target.checked) {
+            setBrands(state => {
+                return [...state, brand]
+            })
+        } else {
+            setBrands(state => {
+                return [...state.filter(b => b !== brand)]
+            })
+        }
+    }
+
     useEffect(() => {
         dispatch(listProducts(keyword, pageNumber, category))
     }, [dispatch, keyword, pageNumber, category]);
@@ -51,9 +77,14 @@ const CategoryScreen = ({match}) => {
             dispatch(sortProducts(sortBy))
     }, [dispatch, appliedFilters, filteredProducts])
 
+    useEffect(() => {
+        debouncedDispatch(dispatch, brands);
+        console.log("realtime",brands)
+    }, [brands])
+
 	return (
         <Row>
-            <FilterSidebar handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler}/>
+            <FilterSidebar handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
             <Col>
                     {
                     loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (

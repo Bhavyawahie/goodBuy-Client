@@ -37,6 +37,10 @@ export const excludeOutOfStockProducts = (flag) => (dispatch) => {
     })
 }
 
+export const filteredProductsViaBrands = (brands) => (dispatch) => {
+    console.log(brands)
+}
+
 export const clearAllFilters = () => (dispatch) => {
     dispatch({
         type: PRODUCT_SORT_BY_RESET
