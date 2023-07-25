@@ -17,7 +17,7 @@ const CategoryScreen = ({match}) => {
     const keyword = ""
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
-    const {loading, error, products, page, pages, filteredProducts} = productList
+    const {loading, error, products, page, pages, filteredProducts, sortBy, appliedFilters} = productList
     // const productSort = useSelector(state => state.productSort)
     // const {products: {updatedProducts}} = productSort
 
@@ -46,11 +46,10 @@ const CategoryScreen = ({match}) => {
         dispatch(listProducts(keyword, pageNumber, category))
     }, [dispatch, keyword, pageNumber, category]);
 
-    // useEffect(() => {
-    //     if(updatedProducts) {
-    //         dispatch({type: PRODUCT_LIST_SUCCESS, payload: updatedProducts})
-    //     }
-    // }, [updatedProducts])
+    useEffect(() => {
+        if(appliedFilters.indexOf("EXCLUDE_OUT_OF_STOCK") == -1)
+            dispatch(sortProducts(sortBy))
+    }, [dispatch, appliedFilters, filteredProducts])
 
 	return (
         <Row>

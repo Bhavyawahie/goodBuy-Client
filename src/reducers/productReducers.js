@@ -36,41 +36,40 @@ const removeFilter = (filter, appliedFilters) => {
 }
 
 
-export const productListReducer = (state = { products: [], appliedFilters: [], filteredProducts:[] }, action) => {
+export const productListReducer = (state = { products: [], appliedFilters: [], sortBy: "", filteredProducts:[] }, action) => {
     switch(action.type) {
         case PRODUCT_LIST_REQUEST :
             return { ...state , loading: true, products: []}
         case PRODUCT_LIST_SUCCESS :
-            return { ...state, loading: false, products: action.payload.products, filteredProducts: action.payload.products.slice() ,pages: action.payload.pages, page: action.payload.page}
+            return { ...state, loading: false, products: action.payload.products, filteredProducts: action.payload.products.slice(), sortBy: "DEFAULT", pages: action.payload.pages, page: action.payload.page}
         case PRODUCT_LIST_FAIL :
             return { ...state, loading: false, error: action.payload}
         case PRODUCT_SORT_BY_PRICE_SET:
             let sortByPriceState = Object.assign({}, state);
-            let sortedPriceArr = action.payload === "LOW_TO_HIGH" ? sortAsc(state.filteredProducts, "price") : sortDesc(state.filteredProducts, "price");
-            console.log(sortedPriceArr)
-            console.log(state)
+            let sortedPriceArr = action.payload === "DEFAULT" ? state.filteredProducts : action.payload === "LOW_TO_HIGH" ? sortAsc(state.filteredProducts, "price") : sortDesc(state.filteredProducts, "price");
+            // console.log(sortedPriceArr)
+            // console.log(state)
             sortByPriceState.filteredProducts = sortedPriceArr;
-            sortByPriceState.appliedFilters = removeFilter(
-                PRODUCT_SORT_BY_PRICE_SET,
-                sortByPriceState.appliedFilters
-            );
+            sortByPriceState.sortBy = action.payload
             // console.log(sortByPriceState)
-            return {...sortByPriceState};
-        // case PRODUCT_SORT_BY_LOW_TO_HIGH_SET:
-        //     let sortByLowPriceState = Object.assign({}, state);
-        //     return {...sortByLowPriceState, products: sortByLowPriceState.products.sort((productA, productB) => productA.price - productB.price) }
-        // case PRODUCT_SORT_BY_HIGH_TO_LOW_SET:
-        //     let sortByHighPriceState = Object.assign({}, state);
-        //     return {...sortByHighPriceState, products: sortByHighPriceState.products.sort((productA, productB) => productB.price - productA.price) }
+            return sortByPriceState;
         case PRODUCT_SORT_BY_RESET:
             return {...state, products: state.products.sort((a, b) => a._id.toString().localeCompare(b._id.toString())) } 
         case PRODUCT_EXCLUDE_OUT_OF_STOCK_SET:
             let newState = Object.assign({}, state);
             let filteredValues = state.filteredProducts.filter((product) => product.countInStock !== 0 )
             if(action.payload) {
-                return {...state, filteredProducts: filteredValues}
+                newState.appliedFilters = addFilterIfNotExists(
+                    "EXCLUDE_OUT_OF_STOCK",
+                    newState.appliedFilters
+                );
+                return {...newState, filteredProducts: filteredValues}
             } else {
-                return {...state, filteredProducts: state.products}
+                newState.appliedFilters = removeFilter(
+                    "EXCLUDE_OUT_OF_STOCK",
+                    newState.appliedFilters
+                );
+                return {...newState, filteredProducts: newState.products}
             }
         default:
             return state
