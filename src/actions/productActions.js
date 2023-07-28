@@ -37,8 +37,7 @@ export const excludeOutOfStockProducts = (flag) => (dispatch) => {
     })
 }
 
-export const filteredProductsViaBrands = (brands) => (dispatch) => {
-    console.log(brands)
+export const filteredProductsViaBrands = (brands) => (dispatch, getState) => {
     dispatch({
         type: PRODUCT_FILTER_BY_BRAND_SET,
         payload: brands

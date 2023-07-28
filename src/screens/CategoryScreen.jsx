@@ -66,11 +66,13 @@ const CategoryScreen = ({match}) => {
         } 
     }, [dispatch, appliedFilters, filteredProducts])
     
-    // useEffect(() => {
-    //     if(brands.length > 0 && appliedFilters.includes("FILTER_BY_BRAND")) {
-    //         dispatch(excludeOutOfStockProducts(appliedFilters.includes("EXCLUDE_OUT_OF_STOCK")))
-    //     }
-    // }, [dispatch, appliedFilters, brands])
+    useEffect(() => {
+        if(brands.length > 0 && appliedFilters.includes("FILTER_BY_BRAND") && appliedFilters.includes("EXCLUDE_OUT_OF_STOCK")) {
+            setTimeout(() => {
+                dispatch(excludeOutOfStockProducts(appliedFilters.includes("EXCLUDE_OUT_OF_STOCK")))
+            }, 1010);
+        }
+    }, [dispatch, appliedFilters, brands])
 
     useEffect(() => {
         let timer = setTimeout(() => {
