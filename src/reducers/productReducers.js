@@ -36,7 +36,7 @@ const removeFilter = (filter, appliedFilters) => {
 }
 
 
-export const productListReducer = (state = { products: [], appliedFilters: [], sortBy: "", filteredProducts:[] }, action) => {
+export const productListReducer = (state = { products: [], appliedFilters: [], sortBy: "", filteredProducts:[], uiSnapshot: {}}, action) => {
     switch(action.type) {
         case PRODUCT_LIST_REQUEST :
             return { ...state , loading: true, products: []}
@@ -63,23 +63,27 @@ export const productListReducer = (state = { products: [], appliedFilters: [], s
                     "EXCLUDE_OUT_OF_STOCK",
                     newState.appliedFilters
                 );
-                return {...newState, filteredProducts: filteredValues}
+                return {...newState, filteredProducts: filteredValues, uiSnapshot: state}
             } else {
                 newState.appliedFilters = removeFilter(
                     "EXCLUDE_OUT_OF_STOCK",
                     newState.appliedFilters
                 );
-                return {...newState, filteredProducts: newState.products}
+                return {...newState, filteredProducts: state.uiSnapshot.filteredProducts, uiSnapshot: state}
             }
         case PRODUCT_FILTER_BY_BRAND_SET:
             let brands = action.payload
-            let filteredByBrandState = Object.assign({}, state)
-            let filteredByBrandsValue = state.filteredProducts.filter((product) => brands.includes(product.brand))
-            filteredByBrandState.appliedFilters = addFilterIfNotExists(
-                "FILTER_BY_BRAND",
-                filteredByBrandState.appliedFilters
-            )
-            return {...filteredByBrandState, filteredProducts: filteredByBrandsValue}
+            if(brands.length <= 0 ) {
+                return {...state.uiSnapshot}
+            } else {
+                let filteredByBrandState = Object.assign({}, state)
+                let filteredByBrandsValue = state.products.filter((product) => brands.includes(product.brand))
+                filteredByBrandState.appliedFilters = addFilterIfNotExists(
+                    "FILTER_BY_BRAND",
+                    filteredByBrandState.appliedFilters
+                )
+                return {...filteredByBrandState, filteredProducts: filteredByBrandsValue, uiSnapshot: state}
+            }
         default:
             return state
     }

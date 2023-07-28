@@ -61,17 +61,23 @@ const CategoryScreen = ({match}) => {
     }, [dispatch, keyword, pageNumber, category]);
 
     useEffect(() => {
-        if(appliedFilters.indexOf("EXCLUDE_OUT_OF_STOCK") == -1)
+        if(appliedFilters.indexOf("EXCLUDE_OUT_OF_STOCK") == -1) {
             dispatch(sortProducts(sortBy))
+        } 
     }, [dispatch, appliedFilters, filteredProducts])
+    
+    // useEffect(() => {
+    //     if(brands.length > 0 && appliedFilters.includes("FILTER_BY_BRAND")) {
+    //         dispatch(excludeOutOfStockProducts(appliedFilters.includes("EXCLUDE_OUT_OF_STOCK")))
+    //     }
+    // }, [dispatch, appliedFilters, brands])
 
     useEffect(() => {
-        console.log(brands)
         let timer = setTimeout(() => {
             if(brands.length > 0) {
                 dispatch(filteredProductsViaBrands(brands))
             }          
-        }, 2000)
+        }, 1000)
         return () => {
             clearTimeout(timer)
         }
