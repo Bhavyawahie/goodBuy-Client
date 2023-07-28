@@ -23,18 +23,6 @@ const CategoryScreen = ({match}) => {
     // const productSort = useSelector(state => state.productSort)
     // const {products: {updatedProducts}} = productSort
 
-    const debounce = (func, delay) =>  {
-        let timerId;
-        return function (...args) {
-            clearTimeout(timerId);
-            timerId = setTimeout(() => func.apply(this, args), delay);
-        };
-    }
-
-    const debouncedDispatch = debounce((dispatch, data) => {
-        dispatch(filteredProductsViaBrands(data))
-    }, 1000);
-
     const clearAllFiltersHandler = () => {
         dispatch(clearAllFilters())
     }
@@ -78,9 +66,15 @@ const CategoryScreen = ({match}) => {
     }, [dispatch, appliedFilters, filteredProducts])
 
     useEffect(() => {
-        if(brands.length > 0)
-        debouncedDispatch(dispatch, brands);
-        // console.log("realtime",brands)
+        console.log(brands)
+        let timer = setTimeout(() => {
+            if(brands.length > 0) {
+                dispatch(filteredProductsViaBrands(brands))
+            }          
+        }, 2000)
+        return () => {
+            clearTimeout(timer)
+        }
     }, [brands])
 
 	return (
