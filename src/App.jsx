@@ -48,7 +48,7 @@ function App() {
           <Route path="/admin/orderlist" component={OrderListScreen}/>
           <Route exact path="/categories/:category" component={CategoryScreen} />
           <Route path="/categories/:category/page/:pageNumber" component={CategoryScreen} />
-          <Route path="/search/:keyword" component={SearchScreen}/>
+          <Route exact path="/search/:keyword" component={SearchScreen}/>
           <Route path="/search/:keyword/page/:pageNumber" component={SearchScreen}/>
           <Route exact path="/" component={HomeScreen}/>
           {/* <Route component={NotFoundScreen}/> */}

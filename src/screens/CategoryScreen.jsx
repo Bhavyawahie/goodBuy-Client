@@ -27,6 +27,7 @@ const CategoryScreen = ({match}) => {
     // const {products: {updatedProducts}} = productSort
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    
     const clearAllFiltersHandler = () => {
         dispatch(clearAllFilters())
     }
@@ -99,7 +100,7 @@ const CategoryScreen = ({match}) => {
                 <Modal.Title>Filters</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <FilterModal handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
+                <FilterModal handleShowModal={handleClose} handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
             </Modal.Body>
         </Modal>
         <Row>

@@ -100,12 +100,12 @@ const SearchScreen = ({match}) => {
                     <Modal.Title>Filters</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <FilterModal/>
+                    <FilterModal handleShowModal={handleClose} handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
                 </Modal.Body>
             </Modal>
         <Row>
-            <FilterSidebar handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
-            <Col>
+            <FilterSidebar handleShowModal={handleClose} handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
+            <Col className="d-flex flex-column">
                     {
                     loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
                         <>
