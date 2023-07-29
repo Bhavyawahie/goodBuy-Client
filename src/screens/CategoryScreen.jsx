@@ -92,7 +92,7 @@ const CategoryScreen = ({match}) => {
 
 	return (
         <>
-        <Modal show={show} fullscreen={true} onHide={() => setShow(false)}>
+        <Modal show={show} fullscreen onHide={() => setShow(false)}>
             <Modal.Header closeButton>
                 <Modal.Title>Modal</Modal.Title>
             </Modal.Header>
@@ -101,8 +101,8 @@ const CategoryScreen = ({match}) => {
         <Row>
             <FilterSidebar handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
             <Col className="d-flex flex-column">
-                <Row className="d-flex justify-content-end mt-4">
-                    <Button variant="secondary" className="filter-btn btn btn-outline-secondary w-25" onClick={handleShow}>Filters</Button>
+                <Row className="d-flex justify-content-end mt-4 filter-btn-container-row">
+                    <Button className="filter-btn w-25" onClick={handleShow}>Filters</Button>
                 </Row>
                     {
                     loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
