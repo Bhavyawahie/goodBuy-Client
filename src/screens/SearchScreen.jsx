@@ -10,8 +10,10 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { clearAllFilters, excludeOutOfStockProducts, filteredProductsViaBrands, listProducts, sortProducts } from "../actions/productActions";
 import { PRODUCT_LIST_SUCCESS } from "../constants/productConstants";
 import { useState } from "react";
+import ProductListItems from "../components/ProductListItems";
 
 const SearchScreen = ({match}) => {
+    const [show, setShow] = useState(false);
     const [brands, setBrands] = useState([])
     const category = match.params.category
     const pageNumber = match.params.pageNumber || 1
@@ -22,6 +24,8 @@ const SearchScreen = ({match}) => {
     const {loading, error, products, page, pages, filteredProducts, sortBy, appliedFilters} = productList
     // const productSort = useSelector(state => state.productSort)
     // const {products: {updatedProducts}} = productSort
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const clearAllFiltersHandler = () => {
         dispatch(clearAllFilters())
@@ -95,23 +99,41 @@ const SearchScreen = ({match}) => {
                     {
                     loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
                         <>
-                            <Row className="mt-5 pt-5"> 
-                                <Row className="mt-4">
-                                    <Col className="d-flex justify-content-end"></Col>
-                                </Row>
-                            {
-                                filteredProducts.map(product => (
-                                    <Col 
-                                        md={4}
-                                        lg={4}
-                                        xl={3}
-                                        key={product._id}>
-                                        <Product productContent={product}/>
+                            <Row> 
+                                <Row>
+                                    <Col className="d-flex justify-content-end">
+                                        <Button className="filter-btn" onClick={handleShow}>Filters</Button>
                                     </Col>
-                                ))
-                            } </Row>
+                                </Row>
+                                <Row className="mt-5 py-2 d-flex justify-content-center product-card-default">
+                                    {
+                                        filteredProducts.map(product => (
+                                            <Col 
+                                                md={4}
+                                                lg={4}
+                                                xl={3}
+                                                key={product._id}>
+                                                <Product productContent={product}/>
+                                            </Col>
+                                        ))
+                                    } 
+                                </Row>
+                                <Row className="mt-1 d-flex justify-content-center product-card-list">
+                                    {
+                                        filteredProducts.map(product => (
+                                            <Col 
+                                                md={4}
+                                                lg={4}
+                                                xl={3}
+                                                key={product._id}>
+                                                <ProductListItems product={product}/>
+                                            </Col>
+                                        ))
+                                    } 
+                                </Row>
+                            </Row>
                             <Container className='d-flex justify-content-center mt-5'>
-                                <Paginate pages={pages} page={page} pathname={location.pathname.split("/")[1]} keyword={keyword} />
+                                <Paginate pages={pages} page={page} pathname={location.pathname.split("/")[1]} keyword={keyword} category={match.params.category} />
                             </Container>  
                         </>
                     )
