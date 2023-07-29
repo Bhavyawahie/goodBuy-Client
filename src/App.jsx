@@ -22,6 +22,7 @@ import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import SubHeader from './components/SubHeader'
 import CategoryScreen from './screens/CategoryScreen'
+import SearchScreen from './screens/SearchScreen'
 
 function App() {
   return (
@@ -47,8 +48,8 @@ function App() {
           <Route path="/admin/orderlist" component={OrderListScreen}/>
           <Route exact path="/categories/:category" component={CategoryScreen} />
           <Route path="/categories/:category/page/:pageNumber" component={CategoryScreen} />
-          <Route path="/search/:keyword" component={CategoryScreen}/>
-          <Route exact path="/search/:keyword/page/:pageNumber" component={HomeScreen}/>
+          <Route path="/search/:keyword" component={SearchScreen}/>
+          <Route path="/search/:keyword/page/:pageNumber" component={SearchScreen}/>
           <Route exact path="/" component={HomeScreen}/>
           {/* <Route component={NotFoundScreen}/> */}
         </Container>

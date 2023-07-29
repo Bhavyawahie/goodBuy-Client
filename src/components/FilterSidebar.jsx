@@ -45,6 +45,7 @@ const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilte
 					step="100"
 				/>
 				<h4>Brands</h4>
+				<div className="mb-3">
 				{
                     brands.map((brand) => (
                     <Row>
@@ -62,7 +63,8 @@ const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilte
                         </label>
                     </Row>
                 ))}
-				{   !location.pathname.indexOf('/categories') === 0 && (
+				</div>
+				{   location.pathname.indexOf('/categories') === 0 ? <></>: (
 
                     <>
                         <h4>Categories</h4>
