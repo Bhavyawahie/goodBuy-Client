@@ -73,17 +73,19 @@ export const productListReducer = (state = { products: [], appliedFilters: [], s
             }
         case PRODUCT_FILTER_BY_BRAND_SET:
             let brands = action.payload
-            if(brands.length <= 0 ) {
-                return {...state.uiSnapshot}
-            } else {
-                let filteredByBrandState = Object.assign({}, state)
-                let filteredByBrandsValue = state.products.filter((product) => brands.includes(product.brand))
-                filteredByBrandState.appliedFilters = addFilterIfNotExists(
+            let filteredByBrandState = Object.assign({}, state)
+            let filteredByBrandsValue = state.products.filter((product) => brands.includes(product.brand))
+            filteredByBrandState.appliedFilters = addFilterIfNotExists(
+                "FILTER_BY_BRAND",
+                filteredByBrandState.appliedFilters
+            )
+            if(filteredByBrandsValue.length === state.products.map(p => p.brand).length) {
+                filteredByBrandState.appliedFilters = removeFilter(
                     "FILTER_BY_BRAND",
                     filteredByBrandState.appliedFilters
                 )
-                return {...filteredByBrandState, filteredProducts: filteredByBrandsValue, uiSnapshot: state}
             }
+            return {...filteredByBrandState, filteredProducts: filteredByBrandsValue, uiSnapshot: state}
         default:
             return state
     }

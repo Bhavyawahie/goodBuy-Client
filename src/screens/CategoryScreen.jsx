@@ -80,6 +80,9 @@ const CategoryScreen = ({match}) => {
                 dispatch(filteredProductsViaBrands(brands))
             }          
         }, 1000)
+        if(brands.length === 0  && appliedFilters.includes("FILTER_BY_BRAND")) {
+            dispatch(filteredProductsViaBrands([...products.map(p => p.brand)]))
+        }
         return () => {
             clearTimeout(timer)
         }
