@@ -111,7 +111,7 @@ const CategoryScreen = ({match}) => {
                                 ))
                             } </Row>
                             <Container className='d-flex justify-content-center mt-5'>
-                                <Paginate pages={pages} page={page} pathname={location.pathname.split("/")[1]} keyword={keyword ? keyword : match.params.category} />
+                                <Paginate pages={pages} page={page} pathname={location.pathname.split("/")[1]} keyword={keyword} category={match.params.category} />
                             </Container>  
                         </>
                     )
