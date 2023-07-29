@@ -18,13 +18,10 @@ const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilte
 	
 
 	return (
-		<Row className="filter-component position-relative h-100 overflow-auto w-25 modal-filter">
-			<div className="flex-container filter-header p-3 d-flex justify-content-between align-items-center">
-				<h3 className="txt-header-3">Filters</h3>
-				<Button variant="clear" className="btn-outline-info btn-sm" onClick={handleClearAllFilters}>Clear All</Button>
-			</div>
+		<Row className="filter-component position-relative h-100 overflow-auto w- modal-filter">
+        <Col>
 
-			<div className="sort-container p-3">
+			<div className="sort-container px-2 mb-3">
 				<h4>Sort by Price:</h4>
 				<Form.Control as='select' className="w-50" size="sm" onChange={(e) => handleSort(e)}>
 					<option value="DEFAULT" >Relevance</option>
@@ -33,7 +30,7 @@ const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilte
 				</Form.Control>
 			</div>
 
-			<div className="filter-container p-3">
+			<div className="filter-container px-2">
                 <h4>Availibity</h4>
 				<Form.Check label="Exclude Out of stock" type="checkbox" className="my-3" onChange={(e) => handleExcludeOutOfStock(e)}/>
 				<h4>Pricing</h4>
@@ -43,6 +40,7 @@ const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilte
 					min="0"
 					max="30000"
 					step="100"
+                    value="0"
 				/>
 				<h4>Brands</h4>
 				<div className="mb-3">
@@ -92,6 +90,11 @@ const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilte
                 )
                 }
 			</div>
+        </Col>
+			<Col xs={3} className="flex-container filter-header d-flex justify-content-end align-items-start">
+				<Button variant="clear" className="btn-outline-info btn-sm" onClick={handleClearAllFilters}>Clear All</Button>
+			</Col>
+
 		</Row>
 	);
 };

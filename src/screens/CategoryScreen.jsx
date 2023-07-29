@@ -11,6 +11,7 @@ import { clearAllFilters, excludeOutOfStockProducts, filteredProductsViaBrands, 
 import { PRODUCT_LIST_SUCCESS } from "../constants/productConstants";
 import { useState } from "react";
 import ProductListItems from "../components/ProductListItems";
+import FilterModal from "../components/FilterModal";
 
 const CategoryScreen = ({match}) => {
     const [show, setShow] = useState(false);
@@ -95,9 +96,11 @@ const CategoryScreen = ({match}) => {
         <>
         <Modal show={show} fullscreen onHide={() => setShow(false)}>
             <Modal.Header closeButton>
-                <Modal.Title>Modal</Modal.Title>
+                <Modal.Title>Filters</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Modal body content</Modal.Body>
+            <Modal.Body>
+                <FilterModal handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
+            </Modal.Body>
         </Modal>
         <Row>
             <FilterSidebar handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>

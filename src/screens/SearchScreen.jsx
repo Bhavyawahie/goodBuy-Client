@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import FilterSidebar from "../components/FilterSidebar";
 import Product from "../components/Product";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, Modal } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
@@ -11,6 +11,7 @@ import { clearAllFilters, excludeOutOfStockProducts, filteredProductsViaBrands, 
 import { PRODUCT_LIST_SUCCESS } from "../constants/productConstants";
 import { useState } from "react";
 import ProductListItems from "../components/ProductListItems";
+import FilterModal from "../components/ProductListItems";
 
 const SearchScreen = ({match}) => {
     const [show, setShow] = useState(false);
@@ -93,6 +94,15 @@ const SearchScreen = ({match}) => {
     }, [brands])
 
 	return (
+        <>
+            <Modal show={show} fullscreen onHide={() => setShow(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Filters</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <FilterModal/>
+                </Modal.Body>
+            </Modal>
         <Row>
             <FilterSidebar handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
             <Col>
@@ -140,6 +150,7 @@ const SearchScreen = ({match}) => {
                 }  
             </Col>
         </Row>
+        </>
     );
 };
 
