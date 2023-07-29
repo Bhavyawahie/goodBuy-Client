@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import FilterSidebar from "../components/FilterSidebar";
 import Product from "../components/Product";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, Modal } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
@@ -12,6 +12,7 @@ import { PRODUCT_LIST_SUCCESS } from "../constants/productConstants";
 import { useState } from "react";
 
 const CategoryScreen = ({match}) => {
+    const [show, setShow] = useState(false);
     const [brands, setBrands] = useState([])
     const category = match.params.category
     const pageNumber = match.params.pageNumber || 1
@@ -22,7 +23,8 @@ const CategoryScreen = ({match}) => {
     const {loading, error, products, page, pages, filteredProducts, sortBy, appliedFilters} = productList
     // const productSort = useSelector(state => state.productSort)
     // const {products: {updatedProducts}} = productSort
-
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const clearAllFiltersHandler = () => {
         dispatch(clearAllFilters())
     }
@@ -89,12 +91,22 @@ const CategoryScreen = ({match}) => {
     }, [brands])
 
 	return (
+        <>
+        <Modal show={show} fullscreen={true} onHide={() => setShow(false)}>
+            <Modal.Header closeButton>
+                <Modal.Title>Modal</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Modal body content</Modal.Body>
+        </Modal>
         <Row>
             <FilterSidebar handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
-            <Col>
+            <Col className="d-flex flex-column">
+                <Row className="d-flex justify-content-end mt-4">
+                    <Button variant="secondary" className="filter-btn btn btn-outline-secondary w-25" onClick={handleShow}>Filters</Button>
+                </Row>
                     {
                     loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
-                        <>
+                        <Row>
                             <Row className="mt-5 pt-5"> 
                                 <Row className="mt-4">
                                     <Col className="d-flex justify-content-end"></Col>
@@ -113,11 +125,12 @@ const CategoryScreen = ({match}) => {
                             <Container className='d-flex justify-content-center mt-5'>
                                 <Paginate pages={pages} page={page} pathname={location.pathname.split("/")[1]} keyword={keyword} category={match.params.category} />
                             </Container>  
-                        </>
+                        </Row>
                     )
                 }  
             </Col>
         </Row>
+        </>
     );
 };
 

@@ -71,23 +71,23 @@ const HomeScreen = ({ match }) => {
                         <>
                             <Container className="p-2">
                                 <Row>
-                                    <Col xs={6} sm={6}><Product productContent={products[0]}/></Col>
-                                    <Col xs={6} sm={6}><Product productContent={products[1]}/></Col>
+                                    <Col xs={6} sm={6}><Product productContent={products[products.length - 1]}/></Col>
+                                    <Col xs={6} sm={6}><Product productContent={products[products.length - 2]}/></Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={6} sm={6}><Product productContent={products[5]}/></Col>
-                                    <Col xs={6} sm={6}><Product productContent={products[6]}/></Col>
+                                    <Col xs={6} sm={6}><Product productContent={products[products.length - 3]}/></Col>
+                                    <Col xs={6} sm={6}><Product productContent={products[products.length - 4]}/></Col>
                                 </Row>
                             </Container>
                             <h2 className="py-3">Up For Grabs!</h2>
                             <Container className="p-2">
                                 <Row>
-                                    <Col xs={6} sm={6}><Product productContent={products[3]}/></Col>
-                                    <Col xs={6} sm={6}><Product productContent={products[7]}/></Col>
+                                    <Col xs={6} sm={6}><Product productContent={products[products.length - 5]}/></Col>
+                                    <Col xs={6} sm={6}><Product productContent={products[products.length - 6]}/></Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={6} sm={6}><Product productContent={products[11]}/></Col>
-                                    <Col xs={6} sm={6}><Product productContent={products[9]}/></Col>
+                                    <Col xs={6} sm={6}><Product productContent={products[products.length - 7]}/></Col>
+                                    <Col xs={6} sm={6}><Product productContent={products[products.length - 8]}/></Col>
                                 </Row>
                             </Container>
                         </>

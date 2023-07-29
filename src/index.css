@@ -71,6 +71,10 @@ h3 {
   background-color: #c8c8c863;
 }
 
+.filter-btn {
+  border: 1px solid red;
+  max-width: 18%;
+}
 
 .max-height-row {
   /* max-height: 390px; */
@@ -139,10 +143,16 @@ footer{
   .payment-provider-asset-container img {
     transform: translateX(1rem);
   }
+  .sidebar-filter {
+    display: none;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 768px){
   .latest-product-carousel {
+    display: none;
+  }
+  .sidebar-filter {
     display: none;
   }
 }
