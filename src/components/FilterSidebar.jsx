@@ -18,7 +18,7 @@ const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilte
 	
 
 	return (
-		<Row className="filter-component position-relative h-100 overflow-auto w-25 sidebar-filter">
+		<Col md={3} lg={3} xl={3} className="filter-component position-relative h-100 overflow-auto w-25 sidebar-filter">
 			<div className="flex-container filter-header p-3 py-2 d-flex justify-content-between align-items-center">
 				<h3 className="txt-header-3">Filters</h3>
 				<Button variant="clear" className="btn-outline-info btn-sm" onClick={handleClearAllFilters}>Clear All</Button>
@@ -92,7 +92,7 @@ const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilte
                 )
                 }
 			</div>
-		</Row>
+		</Col>
 		// <div className="filter-component">
 		// 	<div className="flex-container filter-header">
 		// 		<h3 className="txt-header-3">Filters</h3>

@@ -105,7 +105,7 @@ const CategoryScreen = ({match}) => {
         </Modal>
         <Row>
             <FilterSidebar handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
-            <Col className="d-flex flex-column">
+            <Col className="d-flex flex-column" md={9} lg={9} xl={9}>
                     {
                     loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
                         <>
@@ -115,7 +115,7 @@ const CategoryScreen = ({match}) => {
                                         <Button className="filter-btn" onClick={handleShow}>Filters</Button>
                                     </Col>
                                 </Row>
-                                <Row className="mt-5 py-2 d-flex justify-content-center product-card-default">
+                                <Row className="mt-5 py-2 d-flex justify-content-start product-card-default">
                                     {
                                         filteredProducts.map(product => (
                                             <Col 

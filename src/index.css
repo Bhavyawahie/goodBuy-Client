@@ -155,7 +155,7 @@ footer{
   }
 }
 
-@media (min-width: 575px) and (max-width: 767px){
+@media (min-width: 575px) and (max-width: 768px){
   .latest-product-carousel {
     display: none;
   }
@@ -171,6 +171,9 @@ footer{
   .payment-provider-asset-container img {
     transform: translateX(32rem) translateY(-7.5rem);
   }
+}
+
+@media (min-width:767px ) and (max-width: 992px) {
   .product-card-list {
     display: none!important;
   }
