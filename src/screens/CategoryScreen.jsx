@@ -136,7 +136,7 @@ const CategoryScreen = ({match}) => {
                                                 lg={4}
                                                 xl={3}
                                                 key={product._id}>
-                                                <ProductListItems product={product}/>
+                                                <ProductListItems productContent={product}/>
                                             </Col>
                                         ))
                                     } 

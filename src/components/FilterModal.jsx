@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-const FilterSidebar = ({
+const FilterModal = ({
 	handleSort,
 	handleExcludeOutOfStock,
 	handleClearAllFilters,
@@ -129,4 +129,4 @@ const FilterSidebar = ({
 	);
 };
 
-export default FilterSidebar;
+export default FilterModal;

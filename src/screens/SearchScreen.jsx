@@ -11,7 +11,7 @@ import { clearAllFilters, excludeOutOfStockProducts, filteredProductsViaBrands, 
 import { PRODUCT_LIST_SUCCESS } from "../constants/productConstants";
 import { useState } from "react";
 import ProductListItems from "../components/ProductListItems";
-import FilterModal from "../components/ProductListItems";
+import FilterModal from "../components/FilterModal";
 
 const SearchScreen = ({match}) => {
     const [show, setShow] = useState(false);
@@ -95,14 +95,14 @@ const SearchScreen = ({match}) => {
 
 	return (
         <>
-            <Modal show={show} fullscreen onHide={() => setShow(false)}>
+        <Modal show={show} fullscreen onHide={() => setShow(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Filters</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <FilterModal handleShowModal={handleClose} handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
                 </Modal.Body>
-            </Modal>
+        </Modal>
         <Row>
             <FilterSidebar handleShowModal={handleClose} handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
             <Col className="d-flex flex-column" md={9} lg={9} xl={9}>
@@ -136,7 +136,7 @@ const SearchScreen = ({match}) => {
                                                 lg={4}
                                                 xl={3}
                                                 key={product._id}>
-                                                <ProductListItems product={product}/>
+                                                <ProductListItems productContent={product}/>
                                             </Col>
                                         ))
                                     } 
