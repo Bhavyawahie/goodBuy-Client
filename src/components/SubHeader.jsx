@@ -91,9 +91,22 @@ const SubHeader = () => {
 						>
 							<strong>Best Selling</strong>
 						</Dropdown.Toggle>
-						<Dropdown.Menu show={isOpen2} onMouseEnter={handleMouseEnter2} onMouseLeave={handleMouseLeave2}>	
-							<Dropdown.Item>Another action</Dropdown.Item>
-							<Dropdown.Item>Something else</Dropdown.Item>
+						<Dropdown.Menu show={isOpen2} onMouseEnter={handleMouseEnter2} onMouseLeave={handleMouseLeave2}>
+							<LinkContainer to="/product/6434856d047bb80008529476">
+								<Dropdown.Item className="text-truncate">OnePlus Nord CE 3 Lite</Dropdown.Item>
+							</LinkContainer>	
+							<LinkContainer to="/product/612d4a45165dbe19a870ba36">
+								<Dropdown.Item>Sony Playstation 4 Pro</Dropdown.Item>
+							</LinkContainer>	
+							<LinkContainer to="/product/62c5cac36f4bc93be80c7ce4">
+								<Dropdown.Item>O General 1.5Ton Window AC</Dropdown.Item>
+							</LinkContainer>	
+							<LinkContainer to="/product/6133a7c6e6c77b5600b14402">
+								<Dropdown.Item>Lenovo Legion 5 Pro</Dropdown.Item>
+							</LinkContainer>	
+							<LinkContainer to="/product/612d4a45165dbe19a870ba33">
+								<Dropdown.Item>Apple Airpods</Dropdown.Item>
+							</LinkContainer>	
 						</Dropdown.Menu>
 					</Dropdown>
 					<Dropdown>
@@ -112,9 +125,15 @@ const SubHeader = () => {
 							onMouseEnter={handleMouseEnter3}
 							onMouseLeave={handleMouseLeave3}
 						>
-							<Dropdown.Item>Action</Dropdown.Item>
-							<Dropdown.Item>Another action</Dropdown.Item>
-							<Dropdown.Item>Something else</Dropdown.Item>
+							<LinkContainer to="/product/64b6c9354ba46e0a14ad30be">
+								<Dropdown.Item>OnePlus 11R 5G</Dropdown.Item>
+							</LinkContainer>	
+							<LinkContainer to="/product/64b5a3403b77440008375b95">
+								<Dropdown.Item>Realme Narzo 60 Pro</Dropdown.Item>
+							</LinkContainer>	
+							<LinkContainer to="/product/64b6cbc74ba46e0a14ad3100">
+								<Dropdown.Item>Motorola Razr 40</Dropdown.Item>
+							</LinkContainer>	
 						</Dropdown.Menu>
 					</Dropdown>
 				</Nav>
