@@ -176,10 +176,16 @@ footer{
   .product-card-list {
     display: none!important;
   }
+  .filter-btn {
+    display: none;
+  }
 }
 @media (min-width: 992px) {
   .product-card-list {
     display: none!important;
+  }
+  .filter-btn {
+    display: none;
   }
 }
 @media (min-width: 1400px) {
@@ -189,6 +195,9 @@ footer{
   }
   .product-card-list {
     display: none!important;
+  }
+  .filter-btn {
+    display: none;
   }
 }
 
