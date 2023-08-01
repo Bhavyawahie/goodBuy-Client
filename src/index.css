@@ -145,7 +145,7 @@ footer{
     display: block;
   }
   .payment-provider-asset-container img {
-    transform: translateX(1rem);
+    transform: translateX(-1.5rem);
   }
   .sidebar-filter {
     display: none;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container,Image, Row, Col } from 'react-bootstrap'
+import { Container,Image, Row, Col, Text } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import logo_white_new from '../logo_white_new.png'
 
@@ -14,8 +14,8 @@ const Footer = () => {
                                 width="160"
                                 height="90"
                                 />
-                        <p className='text-muted'>65 A, Arjun Nagar, Behind B6 Market, Safdarjung Enclave, <br/> Delhi-110029</p>        
-                        <p className='text-muted'>CIN: KC52100TQ5L0PJ025D3ZC</p>
+                        <p className='text-light'>65 A, Arjun Nagar, Behind B6 Market, Safdarjung Enclave, <br/> Delhi-110029</p>        
+                        <p className='text-light'>CIN: KC52100TQ5L0PJ025D3ZC</p>
                     </Col>
                     <Col xs={8} sm={4} md={3} lg={2} xl={2} className="pt-3">
                         <p className='h4 footer-section-heading'>Top Selling</p>
@@ -40,11 +40,11 @@ const Footer = () => {
                         </ul>
                     </Col>
                     <Col xs={6} md={3} lg={2} xl={2} className='pt-4 d-flex justify-content-center payment-provider-asset-container' >
-                        <a href="https://razorpay.com/" target="_blank" rel="noReferrer"><img referrerPolicy="origin" src = "https://badges.razorpay.com/badge-light.png " style = {{height: "83px",borderRadius: "7px"}} alt = "Razorpay | Payment Gateway | Neobank"/></a>
+                        <a href="https://razorpay.com/" target="_blank" rel="noReferrer"><img referrerPolicy="origin" src = "https://badges.razorpay.com/badge-light.png " style = {{height: "83px", borderRadius: "7px"}} alt = "Razorpay | Payment Gateway | Neobank"/></a>
                     </Col>
                 </Row>
                 <Row className='mt-3'>
-                    <Col lg={12} md={12} sm={12} xs={12} className='text-justify text-center text-muted'>
+                    <Col lg={12} md={12} sm={12} xs={12} className='text-justify text-center text-light'>
                             {`Copyright © GoodBuy ${new Date().getFullYear()}`} 
                     </Col>
                 </Row>
