@@ -16,6 +16,7 @@ import FilterModal from "../components/FilterModal";
 const CategoryScreen = ({match}) => {
     const [show, setShow] = useState(false);
     const [brands, setBrands] = useState([])
+    const [excludeOutOfStock, setExcludeOutOfStock] = useState(false)
     const category = match.params.category
     const pageNumber = match.params.pageNumber || 1
     const location = useLocation()
@@ -43,8 +44,10 @@ const CategoryScreen = ({match}) => {
     const outOfStockHandler = (e) => {
         const {checked} = e.target
         if(checked) {
+            setExcludeOutOfStock(true)
             dispatch(excludeOutOfStockProducts(true))
         } else {
+            setExcludeOutOfStock(false)
             dispatch(excludeOutOfStockProducts(false))
         }
     }
@@ -104,7 +107,7 @@ const CategoryScreen = ({match}) => {
             </Modal.Body>
         </Modal>
         <Row>
-            <FilterSidebar handleSort={handleSort} handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
+            <FilterSidebar handleSort={handleSort} excludeOutOfStock={excludeOutOfStock}  handleExcludeOutOfStock={outOfStockHandler} handleClearAllFilters={clearAllFiltersHandler} handleBrandFilteration={brandFilterHandler}/>
             <Col className="d-flex flex-column" md={9} lg={9} xl={9}>
                     {
                     loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (

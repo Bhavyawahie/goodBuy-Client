@@ -4,7 +4,7 @@ import {Row, Col, Form, Button} from 'react-bootstrap'
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 
-const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilters, handleBrandFilteration}) => {
+const FilterSidebar = ({handleSort, excludeOutOfStock, handleExcludeOutOfStock, handleClearAllFilters, handleBrandFilteration}) => {
     const location = useLocation()
 	const dispatch = useDispatch();
 	const distinct = (value, index, self) => self.indexOf(value) === index;
@@ -35,7 +35,7 @@ const FilterSidebar = ({handleSort, handleExcludeOutOfStock, handleClearAllFilte
 
 			<div className="filter-container p-3">
                 <h5>Availibity</h5>
-				<Form.Check label="Exclude Out of stock" type="checkbox" className="my-3" onChange={(e) => handleExcludeOutOfStock(e)}/>
+				<Form.Check label="Exclude Out of stock" type="checkbox" className="my-3" onChange={(e) => handleExcludeOutOfStock(e)} value={excludeOutOfStock}/>
 				{/* <h4>Pricing</h4>
 				<Form.Control
 					className="txt-range my-3"
