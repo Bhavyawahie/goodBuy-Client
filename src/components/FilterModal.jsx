@@ -50,7 +50,7 @@ const FilterModal = ({
 						className="my-3"
 						onChange={(e) => handleExcludeOutOfStock(e)}
 					/>
-					<h4>Pricing</h4>
+					{/* <h4>Pricing</h4>
 					<Form.Control
 						className="txt-range my-3"
 						type="range"
@@ -58,7 +58,7 @@ const FilterModal = ({
 						max="30000"
 						step="100"
 						value="0"
-					/>
+					/> */}
 					<h4>Brands</h4>
 					<div className="mb-3">
 						{brands.map((brand) => (
