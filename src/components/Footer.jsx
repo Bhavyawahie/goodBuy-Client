@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container,Image, Row, Col, Text } from 'react-bootstrap'
+import { Container,Image, Row, Col } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import logo_white_new from '../logo_white_new.png'
 

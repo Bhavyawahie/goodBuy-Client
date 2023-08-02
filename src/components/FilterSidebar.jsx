@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Row, Col, Form, Button} from 'react-bootstrap'
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
@@ -9,7 +9,7 @@ const FilterSidebar = ({handleSort, excludeOutOfStock, handleExcludeOutOfStock, 
 	const dispatch = useDispatch();
 	const distinct = (value, index, self) => self.indexOf(value) === index;
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products, page, pages, sortBy } = productList;
+	const { products } = productList;
 
 	const brands = products.map((product) => product.brand).filter(distinct).sort();
 	const categories = products
@@ -47,9 +47,9 @@ const FilterSidebar = ({handleSort, excludeOutOfStock, handleExcludeOutOfStock, 
 				<h5>Brands</h5>
 				<div className="mb-3">
 				{
-                    brands.map((brand) => (
+                    brands.map((brand, idx) => (
                     <Row>
-                        <label key={brand} >
+                        <label key={idx} >
                             <input
                                 type="checkbox"
                                     onClick={(e) =>
@@ -69,9 +69,9 @@ const FilterSidebar = ({handleSort, excludeOutOfStock, handleExcludeOutOfStock, 
                     <>
                         <h4>Categories</h4>
                             {
-                            categories.map((category) => (
+                            categories.map((category, idx) => (
                             <Row>
-                                <label key={category}>
+                                <label key={idx}>
                                     <input
                                         type="checkbox"
                                         onChange={() =>

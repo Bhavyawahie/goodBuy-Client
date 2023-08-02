@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
@@ -14,7 +14,7 @@ const FilterModal = ({
 	const dispatch = useDispatch();
 	const distinct = (value, index, self) => self.indexOf(value) === index;
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products, page, pages, sortBy } = productList;
+	const { products } = productList;
 
 	const brands = products
 		.map((product) => product.brand)

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import FilterSidebar from "../components/FilterSidebar";
 import Product from "../components/Product";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +8,6 @@ import Message from "../components/Message";
 import Paginate from "../components/Paginate";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { clearAllFilters, excludeOutOfStockProducts, filteredProductsViaBrands, listProducts, sortProducts } from "../actions/productActions";
-import { PRODUCT_LIST_SUCCESS } from "../constants/productConstants";
-import { useState } from "react";
 import ProductListItems from "../components/ProductListItems";
 import FilterModal from "../components/FilterModal";
 
@@ -66,10 +64,10 @@ const SearchScreen = ({match}) => {
     }, [dispatch, keyword, pageNumber]);
 
     useEffect(() => {
-        if(appliedFilters.indexOf("EXCLUDE_OUT_OF_STOCK") == -1) {
+        if(appliedFilters.indexOf("EXCLUDE_OUT_OF_STOCK") === -1) {
             dispatch(sortProducts(sortBy))
         } 
-    }, [dispatch, appliedFilters, filteredProducts])
+    }, [dispatch, appliedFilters, filteredProducts, sortBy])
     
     useEffect(() => {
         if(brands.length > 0 && appliedFilters.includes("FILTER_BY_BRAND") && appliedFilters.includes("EXCLUDE_OUT_OF_STOCK")) {
@@ -91,7 +89,7 @@ const SearchScreen = ({match}) => {
         return () => {
             clearTimeout(timer)
         }
-    }, [brands])
+    }, [brands, dispatch, appliedFilters, products])
 
 	return (
         <>

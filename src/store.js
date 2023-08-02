@@ -2,11 +2,10 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { productCreateReducer, productDeleteReducer, productDetailsReducer, productListReducer, productPictureUpdateReducer, productReviewCreateReducer, productSortReducer, productUpdateReducer } from './reducers/productReducers';
+import { productCreateReducer, productDeleteReducer, productDetailsReducer, productListReducer, productPictureUpdateReducer, productReviewCreateReducer, productUpdateReducer } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userDeleteReducer, userDetailsReducer, userListReducer, userLoginReducer, userRegisterReducer, userUpdateProfileReducer, userUpdateReducer } from './reducers/userReducers';
 import { orderCreateReducer, orderDeliverReducer, orderDetailsReducer, orderListMyReducer, orderListReducer, orderPayReducer } from './reducers/orderReducers';
-import { uiStateReducer } from './reducers/uiReducers';
 
 const reducer = combineReducers({
     productList: productListReducer,
@@ -14,7 +13,6 @@ const reducer = combineReducers({
     productCreate: productCreateReducer,
     productUpdate: productUpdateReducer,
     productDelete: productDeleteReducer,
-    // productSort: productSortReducer,
     productPictureUpdate: productPictureUpdateReducer,
     productReviewCreate: productReviewCreateReducer,
     cart: cartReducer,
@@ -31,7 +29,6 @@ const reducer = combineReducers({
     orderDeliver: orderDeliverReducer,
     orderList: orderListReducer,
     orderListMy: orderListMyReducer,
-    uiState: uiStateReducer
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
@@ -40,8 +37,7 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress') ? JSO
 
 const initialState = {
     cart: {cartItems: cartItemsFromStorage, shippingAddress: shippingAddressFromStorage},
-    userLogin: {userInfo: userInfoFromStorage}, 
-    uiSnapshot: null
+    userLogin: {userInfo: userInfoFromStorage},
 }
 
 const middleware = [thunk]

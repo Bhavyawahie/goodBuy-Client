@@ -8,7 +8,6 @@ import Meta from "../components/Meta";
 import Carousell from "../components/Carousell";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
 
 const HomeScreen = ({ match }) => {
@@ -17,7 +16,7 @@ const HomeScreen = ({ match }) => {
 	const pageNumber = match.params.pageNumber || 1;
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
-	const { loading, error, products, page, pages } = productList;
+	const { loading, error, products} = productList;
 
 	const getViewport = () => {
 		const width = Math.max(
