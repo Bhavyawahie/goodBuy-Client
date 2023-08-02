@@ -10,7 +10,7 @@ export const listProducts = (keyword = '', pageNumber = '', category="") => asyn
             type: PRODUCT_LIST_REQUEST
         })
         const encodedCategory = encodeURIComponent(category);
-        const res = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}&category=${encodedCategory}`)
+        const res = await axios.get(awsEndPoint + `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&category=${encodedCategory}`)
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             payload: res.data
@@ -56,7 +56,7 @@ export const listProductDetails = (id) => async (dispatch) => {
         dispatch({
             type: PRODUCT_DETAILS_REQUEST
         })
-        const res = await axios.get(`/api/products/${id}`)
+        const res = await axios.get(awsEndPoint + `/api/products/${id}`)
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -82,7 +82,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}` 
             }
         }
-        await axios.delete(`/api/products/${id}`, config)
+        await axios.delete(awsEndPoint +  `/api/products/${id}`, config)
 
         dispatch({
             type: PRODUCT_DELETE_SUCCESS,
@@ -110,7 +110,7 @@ export const createProduct = () => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}` 
             }
         }
-        const res = await axios.post(`/api/products/`, {} ,config)
+        const res = await axios.post(awsEndPoint +  `/api/products/`, {} ,config)
 
         dispatch({
             type: PRODUCT_CREATE_SUCCESS,
@@ -143,7 +143,7 @@ export const uploadProductImage = (productId ,image) => async (dispatch, getStat
         const reader = new FileReader()
         reader.readAsDataURL(image)
         reader.onloadend = async () => {
-            const res = await axios.post(`/api/products/${productId}/image/upload`, JSON.stringify({image: reader.result}) ,config)
+            const res = await axios.post(awsEndPoint + `/api/products/${productId}/image/upload`, JSON.stringify({image: reader.result}) ,config)
             dispatch({
                 type: PRODUCT_IMAGE_UPLOAD_SUCCESS,
                 payload: res.data
@@ -173,7 +173,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}` 
             }
         }
-        const res = await axios.put(`/api/products/${product._id}`, product ,config)
+        const res = await axios.put(awsEndPoint + `/api/products/${product._id}`, product ,config)
 
         dispatch({
             type: PRODUCT_UPDATE_SUCCESS,
@@ -204,7 +204,7 @@ export const createProductReview = (productId, review ) => async (dispatch, getS
                 Authorization: `Bearer ${userInfo.token}` 
             }
         }
-        await axios.post(`/api/products/${productId}/reviews`, review ,config)
+        await axios.post(awsEndPoint + `/api/products/${productId}/reviews`, review ,config)
 
         dispatch({
             type: PRODUCT_CREATE_REVIEW_SUCCESS,
